@@ -5,30 +5,25 @@ import {useAppSelector} from "../../types/hooks";
 import styled from "styled-components";
 
 
-const rowRenderer = ({key, index, style}: any) => {
-    return (
-        <PostTile key={key} style={style}>
-            row
-            {/*{JSON.stringify()}*/}
-        </PostTile>
-    );
-}
-
 const VirtualList = () => {
     const photosArr = useAppSelector(state => state.getPhotos.photos);
+
+    const RenderedItem = ({index, style}: any) => (
+        <PostTile key={index} style={style}>{index + ' ' + photosArr[index].title}</PostTile>
+    );
 
     return (
         <VirtualListWrap>
             <AutoSizer>
                 {({height, width}: any) => (
-                    <List
+                    <StyledList
                         height={height}
                         itemCount={photosArr.length}
                         itemSize={50}
                         width={width}
                     >
-                        {rowRenderer}
-                    </List>
+                        {RenderedItem}
+                    </StyledList>
                 )}
             </AutoSizer>
         </VirtualListWrap>
@@ -42,8 +37,37 @@ const VirtualListWrap = styled.div`
   height: 90vh;
 `;
 
+const StyledList = styled(List)`
+  background-color: blue;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    //background: #f1f1f1;
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: aqua;
+    height: 60px;
+    border-radius: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+`;
+
 const PostTile = styled.div`
   background-color: wheat;
+  display: flex;
+  align-items: center;
+  width: 50px;
 
   &:hover {
     background-color: red;

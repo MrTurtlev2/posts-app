@@ -6,17 +6,31 @@ const API = 'https://jsonplaceholder.typicode.com';
 export const getPhotosAsync = createAsyncThunk(
     'movies/getMoviesAsync', async () => {
         const data = await axios.get(`${API}/photos`);
+        console.log(data.data)
         return data.data;
     }
 );
+
 export interface MoviesState {
     fetchMovieStatus: string,
     postMovieStatus: string,
-    photos: []
+    photos: [
+        {
+            albumId: number
+            id: number
+            title: string
+        }
+    ]
 }
 
 const initialState: MoviesState = {
-    photos: [],
+    photos: [
+        {
+            albumId: 0,
+            id: 0,
+            title: ''
+        }
+    ],
     fetchMovieStatus: 'pending',
     postMovieStatus: 'pending'
 };
