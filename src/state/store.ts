@@ -1,5 +1,5 @@
 import {Action, configureStore, ThunkAction} from '@reduxjs/toolkit';
-import GetPhotosSlice, {photosSlice} from "./photos/GetPhotosSlice";
+import GetPhotosSlice from "./photos/GetPhotosSlice";
 // import moviesReducer from '../features/movies/movieSlice'
 
 export const store = configureStore({
