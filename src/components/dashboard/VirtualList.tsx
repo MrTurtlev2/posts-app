@@ -9,9 +9,7 @@ const rowRenderer = ({key, index, style}: any) => {
     return (
         <PostTile key={key} style={style}>
             row
-            {/*<p>{JSON.stringify(photosArr)}</p>*/}
-            {/*<p>{JSON.stringify(photosArr)}</p>*/}
-            {/*<PostTile {...photosArr[index]} />*/}
+            {/*{JSON.stringify()}*/}
         </PostTile>
     );
 }

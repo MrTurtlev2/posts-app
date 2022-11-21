@@ -18,7 +18,7 @@ const UserDropdown = () => {
         <UserDropdownWrap ref={ref}>
             <DropDownContent className='flex-center' onClick={() => setListOpen(!isListOpen)}>
                 <UserName>Marek Wojnar</UserName>
-                <StyledArrow src={Arrow} alt='dropdown-icon' rotate={isListOpen}/>
+                <StyledArrow src={Arrow} alt='dropdown-icon' listOpen={isListOpen}/>
             </DropDownContent>
             <DropDownListWrap listOpen={isListOpen} height={barHeight}>
                 vdvvd
@@ -67,10 +67,10 @@ const UserName = styled.p`
   font-size: 16px;
   margin-right: 15px;
 `;
-const StyledArrow = styled.img<{ rotate: Boolean }>`
+const StyledArrow = styled.img<{ listOpen: Boolean }>`
   width: 25px;
   height: 25px;
 
   transition: all .2s ease;
-  transform: ${p => p.rotate ? 'rotate(0.5turn)' : 'rotate(0turn)'};
+  transform: ${p => p.listOpen ? 'rotate(0.5turn)' : 'rotate(0turn)'};
 `;
