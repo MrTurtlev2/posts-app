@@ -19,6 +19,7 @@ export interface MoviesState {
             albumId: number
             id: number
             title: string
+            thumbnailUrl: string
         }
     ]
 }
@@ -28,7 +29,8 @@ const initialState: MoviesState = {
         {
             albumId: 0,
             id: 0,
-            title: ''
+            title: '',
+            thumbnailUrl: ''
         }
     ],
     fetchMovieStatus: 'pending',

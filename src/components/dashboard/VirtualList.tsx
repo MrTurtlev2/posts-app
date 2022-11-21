@@ -3,13 +3,14 @@ import AutoSizer from "react-virtualized-auto-sizer";
 import {FixedSizeList as List} from "react-window";
 import {useAppSelector} from "../../types/hooks";
 import styled from "styled-components";
+import PostTile from "../common/PostTile";
 
 
 const VirtualList = () => {
     const photosArr = useAppSelector(state => state.getPhotos.photos);
 
     const RenderedItem = ({index, style}: any) => (
-        <PostTile key={index} style={style}>{index + ' ' + photosArr[index].title}</PostTile>
+        <PostTile key={index} style={style} {...photosArr[index]} />
     );
 
     return (
@@ -19,7 +20,7 @@ const VirtualList = () => {
                     <StyledList
                         height={height}
                         itemCount={photosArr.length}
-                        itemSize={50}
+                        itemSize={width / 2}
                         width={width}
                     >
                         {RenderedItem}
@@ -38,38 +39,38 @@ const VirtualListWrap = styled.div`
 `;
 
 const StyledList = styled(List)`
-  background-color: blue;
+  //background-color: blue;
   flex-direction: row;
   flex-wrap: wrap;
 
-
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  ::-webkit-scrollbar-track {
-    //background: #f1f1f1;
-    background: #f1f1f1;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: aqua;
-    height: 60px;
-    border-radius: 8px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
 `;
 
-const PostTile = styled.div`
-  background-color: wheat;
+const PostTile1 = styled.div`
+  background-color: transparent;
   display: flex;
   align-items: center;
-  width: 50px;
 
   &:hover {
     background-color: red;
   }
 `;
+
+
+//
+// ::-webkit-scrollbar {
+//     width: 10px;
+// }
+//
+// ::-webkit-scrollbar-track {
+//     background: #f1f1f1;
+// }
+//
+// ::-webkit-scrollbar-thumb {
+//     background: aqua;
+//     height: 60px;
+//     border-radius: 8px;
+// }
+//
+// ::-webkit-scrollbar-thumb:hover {
+//     background: #555;
+// }
