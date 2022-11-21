@@ -1,11 +1,13 @@
 import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../types/hooks";
 import {getPhotosAsync} from "../state/photos/GetPhotosSlice";
+import PostTile from "../components/common/PostTile";
 
 const Dashboard = () => {
 
     const photosArr = useAppSelector(state => state.getPhotos.photos)
-const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
+
     useEffect(()=> {
         dispatch(getPhotosAsync());
     }, [dispatch])
@@ -14,7 +16,9 @@ const dispatch = useAppDispatch();
 
     return (
         <div>
-            DAshboard
+            {photosArr.map((post: any, index) => {
+                return <PostTile key={index} {...post} />
+            })}
         </div>
     )
 }
