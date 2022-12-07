@@ -21,7 +21,7 @@ const TileBackground = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${({theme}) => theme.white};;
+  color: ${({theme}) => theme.white};
 `;
 const TileWrapper = styled.div`
   background-color: #18191A;

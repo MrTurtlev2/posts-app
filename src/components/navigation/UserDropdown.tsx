@@ -2,17 +2,24 @@ import styled, {keyframes} from "styled-components";
 import {useEffect, useRef, useState} from "react";
 import Arrow from '../../assets/img/navigation/dropdownIcon.svg'
 import {bounceInDown, bounceOutRight} from 'react-animations'
+import {useNavigate} from "react-router-dom"
 
 const UserDropdown = () => {
 
     const [isListOpen, setListOpen] = useState<Boolean>(false);
     const [barHeight, setBarHeight] = useState(0);
     const ref = useRef<HTMLDivElement>(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         // @ts-ignore-next-line
         setBarHeight(ref.current.clientHeight)
     }, []);
+
+    const handleLogOut = () => {
+        sessionStorage.clear();
+        navigate('/')
+    }
 
     return (
         <UserDropdownWrap ref={ref}>
@@ -20,8 +27,8 @@ const UserDropdown = () => {
                 <UserName>Marek Wojnar</UserName>
                 <StyledArrow src={Arrow} alt='dropdown-icon' listOpen={isListOpen}/>
             </DropDownContent>
-            <DropDownListWrap listOpen={isListOpen} height={barHeight}>
-                vdvvd
+            <DropDownListWrap listOpen={isListOpen} height={barHeight} onClick={() => handleLogOut()}>
+                <p>Wyloguj się</p>
             </DropDownListWrap>
         </UserDropdownWrap>
     )
@@ -44,7 +51,7 @@ const UserDropdownWrap = styled.div`
 const DropDownContent = styled.div`
   height: 100%;
   width: 100%;
-  z-index: 5;
+  z-index: 100;
 
   &:hover {
     cursor: pointer;
@@ -58,8 +65,9 @@ const DropDownListWrap = styled.div<{ listOpen: Boolean, height: Number }>`
   transition: all 0.5s ease;
   top: ${p => p.height + 'px'};
   right: 0;
-  background-color: red;
-  z-index: 1;
+    //background-color: ${({theme}) => theme.shadow.default};
+  opacity: 1;
+  z-index: 99;
   animation: ${p => p.listOpen ? listOpeningAnim : listClosingAnim} 1s forwards;
 `;
 

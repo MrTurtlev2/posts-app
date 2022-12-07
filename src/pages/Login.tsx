@@ -2,12 +2,13 @@ import CustomInput from "../components/common/CustomInput";
 import {useState} from "react";
 import styled from "styled-components";
 import CustomButton from "../components/common/CustomButton";
+import {useNavigate} from "react-router-dom";
 
 const Login = () => {
     const [name, setName] = useState<string>('')
     const [lastName, setLastName] = useState<string>('')
     const [password, setPassword] = useState<string>('')
-
+    const navigate = useNavigate();
     const handleLogin = () => {
 
         if (name && lastName && password !== '') {
@@ -16,7 +17,7 @@ const Login = () => {
                 lastName: lastName,
                 password: password
             }))
-            window.open('/dashboard');
+            navigate('/dashboard')
         }
     }
 
@@ -41,7 +42,7 @@ const ScreenWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 90vh;
 `;
 const FormWrapper = styled.div`
   display: flex;
