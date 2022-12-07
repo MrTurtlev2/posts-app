@@ -12,15 +12,12 @@ const NavBar = () => {
                         <Link to="/">Dashboard</Link>
                     </div>
                     <div>
-                        <Link to="/login">login</Link>
-                    </div>
-                    <div>
                         <Link to="/nothing-here">Nothing Here</Link>
                     </div>
                 </NavbarList>
                 <UserDropdown/>
             </NavBarWrapper>
-          
+
             <StyledOutlet/>
         </div>
     );

@@ -4,20 +4,32 @@ import styled from "styled-components";
 import CustomButton from "../components/common/CustomButton";
 
 const Login = () => {
-    const [email, setEmail] = useState<string>('')
+    const [name, setName] = useState<string>('')
+    const [lastName, setLastName] = useState<string>('')
     const [password, setPassword] = useState<string>('')
 
+    const handleLogin = () => {
+
+        if (name && lastName && password !== '') {
+            sessionStorage.setItem('userData', JSON.stringify({
+                name: name,
+                lastName: lastName,
+                password: password
+            }))
+            window.open('/dashboard');
+        }
+    }
 
     return (
         <ScreenWrapper>
             <FormWrapper>
-                <CustomInput placeholder='wpisz email' onChange={(event) => setEmail(event.target.value)} value={email}
-                />
+                <CustomInput placeholder='wpisz imie' onChange={(event) => setName(event.target.value)} value={name}/>
+                <CustomInput placeholder='wpisz nazwisko' onChange={(event) => setLastName(event.target.value)}
+                             value={lastName}/>
                 <CustomInput placeholder='wpisz hasło' onChange={(event) => setPassword(event.target.value)}
                              value={password}/>
 
-                <CustomButton buttonText='zaloguj się' onClick={() => {
-                }}/>
+                <CustomButton buttonText='zaloguj się' onClick={() => handleLogin()}/>
             </FormWrapper>
         </ScreenWrapper>
     )
@@ -30,7 +42,6 @@ const ScreenWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-
 `;
 const FormWrapper = styled.div`
   display: flex;
