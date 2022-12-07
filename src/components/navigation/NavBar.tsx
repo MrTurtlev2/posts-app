@@ -20,15 +20,16 @@ const NavBar = () => {
                 </NavbarList>
                 <UserDropdown/>
             </NavBarWrapper>
-            {/* An <Outlet> renders whatever child route is currently active,
-          so you can think about this <Outlet> as a placeholder for
-          the child routes we defined above. */}
-            <Outlet/>
+          
+            <StyledOutlet/>
         </div>
     );
 }
 export default NavBar
 
+const StyledOutlet = styled(Outlet)`
+  height: 90vh;
+`;
 
 const NavBarWrapper = styled.nav`
   background-color: ${({theme}) => theme.white};
