@@ -8,8 +8,15 @@ const Login = () => {
     const [name, setName] = useState<string>('')
     const [lastName, setLastName] = useState<string>('')
     const [password, setPassword] = useState<string>('')
+    const [nameError, setNameError] = useState<boolean>(false)
+    const [lastNameError, setLastNameError] = useState<boolean>(false)
+    const [passwordError, setPasswordError] = useState<boolean>(false)
+
     const navigate = useNavigate();
     const handleLogin = () => {
+        if (name === '') setNameError(true)
+        if (lastName === '') setLastNameError(true)
+        if (password === '') setPasswordError(true)
 
         if (name && lastName && password !== '') {
             sessionStorage.setItem('userData', JSON.stringify({
@@ -24,11 +31,12 @@ const Login = () => {
     return (
         <ScreenWrapper>
             <FormWrapper>
-                <CustomInput placeholder='wpisz imie' onChange={(event) => setName(event.target.value)} value={name}/>
+                <CustomInput placeholder='wpisz imie' onChange={(event) => setName(event.target.value)} value={name}
+                             error={nameError}/>
                 <CustomInput placeholder='wpisz nazwisko' onChange={(event) => setLastName(event.target.value)}
-                             value={lastName}/>
+                             value={lastName} error={lastNameError}/>
                 <CustomInput placeholder='wpisz hasło' onChange={(event) => setPassword(event.target.value)}
-                             value={password}/>
+                             value={password} error={passwordError}/>
 
                 <CustomButton buttonText='zaloguj się' onClick={() => handleLogin()}/>
             </FormWrapper>
