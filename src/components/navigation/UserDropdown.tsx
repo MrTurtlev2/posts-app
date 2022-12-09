@@ -3,7 +3,8 @@ import {useEffect, useRef, useState} from "react";
 import Arrow from '../../assets/img/navigation/dropdownIcon.svg'
 import {bounceInDown, bounceOutRight} from 'react-animations'
 import {useNavigate} from "react-router-dom"
-import {useAppSelector} from "../../types/hooks";
+import {useAppDispatch, useAppSelector} from "../../types/hooks";
+import {logOutUser} from "../../state/user/UserDataSlice";
 
 const UserDropdown = () => {
 
@@ -12,7 +13,7 @@ const UserDropdown = () => {
     const userData = useAppSelector(state => state.getUserData.user);
     const ref = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
-
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         // @ts-ignore-next-line
@@ -20,10 +21,9 @@ const UserDropdown = () => {
         // @ts-ignore
     }, []);
 
-    console.log(userData)
-
     const handleLogOut = () => {
-        sessionStorage.clear();
+        // sessionStorage.clear();
+        dispatch(logOutUser())
         navigate('/')
     }
 

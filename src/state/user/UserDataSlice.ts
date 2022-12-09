@@ -24,11 +24,11 @@ export const userDataSlice = createSlice({
     reducers: {
         logUserWithCredentials: (state, action) => {
             state.user = action.payload;
-        }
+        },
+        logOutUser: () => initialState,
     },
     extraReducers: {}
 });
 
-// @ts-ignore
-export const {logUserWithCredentials} = userDataSlice.actions
+export const {logUserWithCredentials, logOutUser} = userDataSlice.actions
 export default userDataSlice.reducer;
