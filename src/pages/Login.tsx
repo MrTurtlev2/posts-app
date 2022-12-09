@@ -3,6 +3,8 @@ import {useState} from "react";
 import styled from "styled-components";
 import CustomButton from "../components/common/CustomButton";
 import {useNavigate} from "react-router-dom";
+import {useAppDispatch} from "../types/hooks";
+import {logUserWithCredentials} from "../state/user/UserDataSlice";
 
 const Login = () => {
     const [name, setName] = useState<string>('')
@@ -13,17 +15,21 @@ const Login = () => {
     const [passwordError, setPasswordError] = useState<boolean>(false)
 
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+
     const handleLogin = () => {
         if (name === '') setNameError(true)
         if (lastName === '') setLastNameError(true)
         if (password === '') setPasswordError(true)
 
         if (name && lastName && password !== '') {
-            sessionStorage.setItem('userData', JSON.stringify({
+            const user = {
+                isLoggedIn: true,
                 name: name,
                 lastName: lastName,
-                password: password
-            }))
+                password: password,
+            }
+            dispatch(logUserWithCredentials({...user}))
             navigate('/dashboard')
         }
     }

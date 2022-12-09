@@ -3,18 +3,24 @@ import {useEffect, useRef, useState} from "react";
 import Arrow from '../../assets/img/navigation/dropdownIcon.svg'
 import {bounceInDown, bounceOutRight} from 'react-animations'
 import {useNavigate} from "react-router-dom"
+import {useAppSelector} from "../../types/hooks";
 
 const UserDropdown = () => {
 
     const [isListOpen, setListOpen] = useState<Boolean>(false);
     const [barHeight, setBarHeight] = useState(0);
+    const userData = useAppSelector(state => state.getUserData.user);
     const ref = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
+
 
     useEffect(() => {
         // @ts-ignore-next-line
         setBarHeight(ref.current.clientHeight)
+        // @ts-ignore
     }, []);
+
+    console.log(userData)
 
     const handleLogOut = () => {
         sessionStorage.clear();
@@ -24,7 +30,7 @@ const UserDropdown = () => {
     return (
         <UserDropdownWrap ref={ref}>
             <DropDownContent className='flex-center' onClick={() => setListOpen(!isListOpen)}>
-                <UserName>Marek Wojnar</UserName>
+                <UserName>{userData.name + ' ' + userData.lastName}</UserName>
                 <StyledArrow src={Arrow} alt='dropdown-icon' listOpen={isListOpen}/>
             </DropDownContent>
             <DropDownListWrap listOpen={isListOpen} height={barHeight} onClick={() => handleLogOut()}>

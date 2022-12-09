@@ -1,10 +1,11 @@
 import {Action, configureStore, ThunkAction} from '@reduxjs/toolkit';
 import GetPhotosSlice from "./photos/GetPhotosSlice";
-// import moviesReducer from '../features/movies/movieSlice'
+import UserDataSlice from "./user/UserDataSlice";
 
 export const store = configureStore({
     reducer: {
         getPhotos: GetPhotosSlice,
+        getUserData: UserDataSlice,
     },
 });
 
